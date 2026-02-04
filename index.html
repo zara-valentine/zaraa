@@ -4,50 +4,69 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Zara 💖</title>
-  <link rel="stylesheet" href="style.css"/>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<audio id="song" loop>
-  <source src="song.mp3" type="audio/mpeg">
-</audio>
-
-<audio id="heartbeat" loop>
-  <source src="heartbeat.mp3" type="audio/mpeg">
-</audio>
-
-<div id="lock" class="screen">
-  <h1>🔒 This moment is private</h1>
-  <p>Enter password to continue 💖</p>
-  <input id="pass" placeholder="Password"/>
-  <button onclick="unlock()">Unlock</button>
-</div>
-
-<div id="compliments" class="screen hidden">
-  <h1 class="glow">Zara ✨</h1>
-  <div id="box" class="compliment-box"></div>
-</div>
-
-<div id="question" class="screen hidden">
-  <h1>Will you be my Valentine? 💘</h1>
-  <div class="buttons">
-    <button id="yes">YES ❤️</button>
-    <button id="no">NO 😐</button>
+  <!-- 🔐 PASSWORD SCREEN -->
+  <div id="passwordScreen" class="screen">
+    <h2>🔐 This moment is private</h2>
+    <p>Enter the password to continue 💖</p>
+    <input type="password" id="pass" placeholder="Password" />
+    <br>
+    <button onclick="unlock()">Unlock</button>
   </div>
-</div>
 
-<div id="final" class="screen hidden">
-  <h1>💖 She said YES 💖</h1>
-  <p id="secret"></p>
-  <div class="date-card">
-    💌 Valentine Date 💌<br/><br/>
-    With: Zara<br/>
-    From: Sandeep ❤️<br/>
-    Time: Anytime you want<br/>
-    Place: Wherever you smile 😊
+  <!-- 🎀 MAIN APP -->
+  <div id="app" class="hidden">
+
+    <!-- INTRO -->
+    <div id="intro" class="hidden">
+      <h1 id="title" class="glow"></h1>
+      <p id="subtitle"></p>
+    </div>
+
+    <!-- COMPLIMENT BOX -->
+    <div id="box" class="box hidden"></div>
+
+    <!-- QUESTION -->
+    <div id="question" class="hidden">
+      <div class="questionBox">
+        <h2>Will you be my Valentine? 💘</h2>
+        <div class="buttons">
+          <button id="yes">YES ❤️</button>
+          <button id="no">NO 😐</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FINAL SCREEN -->
+    <div id="final" class="hidden">
+      <h1>💖 She said YES 💖</h1>
+      <p id="typing"></p>
+
+      <div id="dateCard" class="dateCard hidden">
+        <h3>💌 Valentine Date 💌</h3>
+        <p><strong>With:</strong> Zara</p>
+        <p><strong>From:</strong> Sandeep ❤️</p>
+        <p><strong>Time:</strong> Anytime you want</p>
+        <p><strong>Place:</strong> Wherever you smile 😊</p>
+      </div>
+    </div>
+
   </div>
-</div>
 
-<script src="script.js"></script>
+  <!-- 🔊 AUDIO -->
+  <audio id="song" src="song.mp3" loop></audio>
+  <audio id="heartbeat" src="heartbeat.mp3" loop></audio>
+
+  <!-- JS -->
+  <script src="script.js"></script>
+
 </body>
 </html>
