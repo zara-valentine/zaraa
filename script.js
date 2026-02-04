@@ -1,10 +1,6 @@
-/* =========================
-   GLOBAL ELEMENTS
-========================= */
-
+// ELEMENTS
 const passwordScreen = document.getElementById("passwordScreen");
 const app = document.getElementById("app");
-const passwordInput = document.getElementById("password");
 
 const nameText = document.getElementById("name");
 const subtitle = document.getElementById("subtitle");
@@ -15,184 +11,151 @@ const yesBtn = document.getElementById("yes");
 const noBtn = document.getElementById("no");
 
 const finalScreen = document.getElementById("final");
-const typingText = document.getElementById("typing");
+const typing = document.getElementById("typing");
 const dateCard = document.getElementById("dateCard");
 
-/* =========================
-   PASSWORD UNLOCK
-========================= */
+const song = document.getElementById("song");
+const heartbeat = document.getElementById("heartbeat");
 
+// COMPLIMENTS
+const compliments = [
+  "Because your smile feels like home 🏡",
+  "Because you make everything brighter ✨",
+  "Because you are effortlessly beautiful 💖",
+  "Because my heart feels calm around you 💕",
+  "Because life feels better with you 🌸",
+  "Because your laugh is my favorite sound 🎶",
+  "Because you understand me without words 💫",
+  "Because you make moments magical 🪄",
+  "Because you are my peace 🤍",
+  "Because you are simply YOU 💘"
+];
+
+let i = 0;
+
+// 🔓 UNLOCK
 function unlock() {
-  const pass = passwordInput.value.trim();
+  const pass = document.getElementById("password").value;
 
   if (pass.toLowerCase() === "zara") {
     passwordScreen.style.display = "none";
     app.classList.remove("hidden");
+
+    // start audio (mobile safe)
+    song.play().catch(()=>{});
+    heartbeat.play().catch(()=>{});
+
     startIntro();
   } else {
-    navigator.vibrate([300, 100, 300]);
-    alert("Wrong password 😜");
+    alert("Wrong password 😝");
+    navigator.vibrate([200, 100, 200]);
   }
 }
 
-/* =========================
-   INTRO TEXT
-========================= */
-
+// INTRO
 function startIntro() {
   nameText.innerHTML = "Zara ✨";
   subtitle.innerHTML =
     "Before I ask you something...<br>let me tell you why you matter 💕";
 
-  setTimeout(startCompliments, 2000);
+  setTimeout(() => {
+    box.classList.remove("hidden");
+    showCompliments();
+  }, 2000);
 }
 
-/* =========================
-   COMPLIMENTS
-========================= */
+// COMPLIMENT FLOW
+function showCompliments() {
+  box.classList.add("shake");
 
-const compliments = [
-  "Because your smile feels like home 🏡",
-  "Because you make everything brighter ✨",
-  "Because you are effortlessly beautiful 💖",
-  "Because my heart feels calm around you 💞",
-  "Because life is better with you 🌸",
-  "Because your laugh is my favorite sound 🎶",
-  "Because you care deeply 🤍",
-  "Because you feel like magic ✨",
-  "Because you are rare 🌹",
-  "Because you are you 💗"
-];
+  box.innerHTML = "";
+  let text = compliments[i];
+  let j = 0;
 
-let i = 0;
+  const typer = setInterval(() => {
+    box.innerHTML += text[j];
+    j++;
 
-function startCompliments() {
-  box.classList.remove("hidden");
-  showCompliment();
+    popHeart();
+
+    if (j === text.length) {
+      clearInterval(typer);
+      box.classList.remove("shake");
+
+      setTimeout(() => {
+        i++;
+        if (i < compliments.length) {
+          showCompliments();
+        } else {
+          setTimeout(showQuestion, 2000);
+        }
+      }, 3000);
+    }
+  }, 40);
 }
 
-function showCompliment() {
-  box.classList.remove("bounce", "shake");
-  void box.offsetWidth;
-
-  box.innerHTML = compliments[i];
-  box.classList.add("bounce");
-
-  spawnTinyHeart();
-
-  i++;
-
-  if (i < compliments.length) {
-    setTimeout(showCompliment, 3000);
-  } else {
-    setTimeout(startDisco, 2000);
-  }
-}
-
-/* =========================
-   TINY HEART POP
-========================= */
-
-function spawnTinyHeart() {
+// ❤️ TINY HEART POP
+function popHeart() {
   const heart = document.createElement("div");
-  heart.className = "tiny-heart";
-  heart.innerHTML = "❤️";
-
-  heart.style.left = Math.random() * window.innerWidth + "px";
-  heart.style.top = "70%";
-
+  heart.className = "tinyHeart";
+  heart.style.left = Math.random() * 100 + "vw";
   document.body.appendChild(heart);
 
-  setTimeout(() => heart.remove(), 1200);
+  setTimeout(() => heart.remove(), 1500);
 }
 
-/* =========================
-   DISCO EFFECT
-========================= */
-
-function startDisco() {
-  let count = 0;
-  const colors = ["#ff5fa2", "#ff8acb", "#ffc1dc", "#ff4d6d"];
-
-  const disco = setInterval(() => {
-    document.body.style.background =
-      colors[Math.floor(Math.random() * colors.length)];
-    count++;
-    if (count > 10) {
-      clearInterval(disco);
-      showQuestion();
-    }
-  }, 500);
-}
-
-/* =========================
-   QUESTION SCREEN
-========================= */
-
+// QUESTION
 function showQuestion() {
   box.classList.add("hidden");
-  subtitle.classList.add("hidden");
   question.classList.remove("hidden");
 }
 
-/* =========================
-   NO BUTTON EVIL 😈
-========================= */
-
+// NO BUTTON ESCAPE + VIBRATION
+noBtn.addEventListener("mouseover", moveNo);
 noBtn.addEventListener("click", () => {
-  navigator.vibrate([500, 100, 500, 100, 500]);
-
-  noBtn.style.left = Math.random() * 80 + "%";
-  noBtn.style.top = Math.random() * 80 + "%";
+  navigator.vibrate([300, 100, 300, 100, 400]);
+  moveNo();
 });
 
-/* =========================
-   YES BUTTON 💖
-========================= */
+function moveNo() {
+  noBtn.style.position = "absolute";
+  noBtn.style.left = Math.random() * 80 + "%";
+  noBtn.style.top = Math.random() * 80 + "%";
+}
 
+// YES FLOW
 yesBtn.addEventListener("click", () => {
   question.classList.add("hidden");
   finalScreen.classList.remove("hidden");
   heartRain();
-  typeMessage();
+  typeFinalMessage();
 });
 
-/* =========================
-   HEART RAIN
-========================= */
-
-function heartRain() {
-  for (let i = 0; i < 40; i++) {
-    setTimeout(() => {
-      const heart = document.createElement("div");
-      heart.innerHTML = "💖";
-      heart.style.position = "fixed";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.top = "-20px";
-      heart.style.fontSize = "20px";
-      heart.style.animation = "fall 3s linear";
-
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 3000);
-    }, i * 100);
-  }
-}
-
-/* =========================
-   TYPING MESSAGE
-========================= */
-
-function typeMessage() {
+// FINAL MESSAGE
+function typeFinalMessage() {
   const msg =
     "Zara, you just made my heart the happiest 💖\nThis is the start of something beautiful.\n— Sandeep ❤️";
 
-  let j = 0;
-  const t = setInterval(() => {
-    typingText.innerText += msg[j];
-    j++;
-    if (j >= msg.length) {
-      clearInterval(t);
-      dateCard.classList.remove("hidden");
+  let k = 0;
+  const typer = setInterval(() => {
+    typing.innerHTML += msg[k];
+    k++;
+    if (k === msg.length) {
+      clearInterval(typer);
+      setTimeout(() => dateCard.classList.remove("hidden"), 1000);
     }
-  }, 50);
-  }
+  }, 40);
+}
+
+// 💖 HEART RAIN
+function heartRain() {
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "rainHeart";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.color = `hsl(${Math.random()*360},100%,70%)`;
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 3000);
+  }, 200);
+}
