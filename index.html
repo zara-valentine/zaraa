@@ -2,32 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Zara 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zara ❤️</title>
 
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
-  <!-- 🔐 PASSWORD SCREEN -->
+  <!-- 🔒 LOCK SCREEN -->
   <div id="passwordScreen" class="screen">
-    <h2>🔐 This moment is private</h2>
+    <h2>🔒 This moment is private</h2>
     <p>Enter the password to continue 💖</p>
-    <input type="password" id="pass" placeholder="Password" />
-    <br>
+    <input type="password" id="password" placeholder="Password" />
+    <br />
     <button onclick="unlock()">Unlock</button>
   </div>
 
-  <!-- 🎀 MAIN APP -->
+  <!-- ❤️ MAIN APP -->
   <div id="app" class="hidden">
 
     <!-- INTRO -->
-    <div id="intro" class="hidden">
-      <h1 id="title" class="glow"></h1>
+    <div id="intro">
+      <h1 id="name" class="glow"></h1>
       <p id="subtitle"></p>
     </div>
 
@@ -40,7 +41,7 @@
         <h2>Will you be my Valentine? 💘</h2>
         <div class="buttons">
           <button id="yes">YES ❤️</button>
-          <button id="no">NO 😐</button>
+          <button id="no">NO 😶</button>
         </div>
       </div>
     </div>
@@ -67,6 +68,5 @@
 
   <!-- JS -->
   <script src="script.js"></script>
-
 </body>
 </html>
