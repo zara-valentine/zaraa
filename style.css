@@ -1,124 +1,163 @@
-*{
-  box-sizing:border-box;
-  font-family:Poppins, sans-serif;
+* {
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
-body{
-  margin:0;
-  min-height:100vh;
-  background:linear-gradient(135deg,#ff6fae,#ff9fcf);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  overflow:hidden;
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ff7eb3, #ff758c);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow-x: hidden;
+  color: #fff;
 }
 
-.screen{
-  background:rgba(255,255,255,0.25);
-  backdrop-filter:blur(14px);
-  padding:30px;
-  border-radius:25px;
-  text-align:center;
-  width:90%;
-  max-width:380px;
+/* COMMON */
+.hidden {
+  display: none !important;
 }
 
-.hidden{display:none;}
-
-input{
-  padding:12px;
-  border-radius:12px;
-  border:none;
-  width:100%;
-  margin:15px 0;
+.screen {
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(12px);
+  padding: 28px;
+  border-radius: 22px;
+  width: 90%;
+  max-width: 420px;
 }
 
-button{
-  padding:12px 25px;
-  border:none;
-  border-radius:25px;
-  cursor:pointer;
-  font-size:16px;
+/* INPUT + BUTTON */
+input {
+  padding: 12px;
+  width: 80%;
+  border-radius: 10px;
+  border: none;
+  margin-top: 10px;
 }
 
-.glow{
-  color:white;
-  text-shadow:0 0 20px white;
+button {
+  margin-top: 15px;
+  padding: 12px 26px;
+  border-radius: 25px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
 }
 
-.compliment-box{
-  margin-top:25px;
-  padding:20px;
-  border-radius:20px;
-  background:rgba(255,255,255,0.35);
-  min-height:80px;
-  font-size:18px;
+/* INTRO */
+#intro {
+  max-width: 90%;
 }
 
-.buttons{
-  margin-top:20px;
-  position:relative;
+.glow {
+  font-size: 36px;
+  text-shadow: 0 0 15px rgba(255,255,255,0.9);
 }
 
-#no{
-  position:absolute;
-  right:0;
-  background:black;
-  color:white;
+#subtitle {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-top: 10px;
 }
 
-#yes{
-  background:white;
-  color:#ff5fa2;
+/* COMPLIMENT BOX */
+.box {
+  background: rgba(255,255,255,0.35);
+  border-radius: 20px;
+  padding: 22px;
+  font-size: 18px;
+  line-height: 1.6;
+  margin-top: 25px;
+  max-width: 90%;
+  min-height: 90px;
+  animation: fadeIn 0.6s ease;
 }
 
-.date-card{
-  margin-top:25px;
-  padding:20px;
-  border-radius:20px;
-  background:rgba(255,255,255,0.35);
-  line-height:1.7;
-}
-/* ===== COMPLIMENT ANIMATIONS ===== */
-
-.bounce {
-  animation: bounce 0.6s ease;
-}
-
-@keyframes bounce {
-  0% { transform: scale(0.9); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
-
+/* SHAKE EFFECT */
 .shake {
-  animation: shake 0.5s ease;
+  animation: shake 0.4s;
 }
 
 @keyframes shake {
   0% { transform: translateX(0); }
-  25% { transform: translateX(-6px); }
-  50% { transform: translateX(6px); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
   75% { transform: translateX(-4px); }
   100% { transform: translateX(0); }
 }
 
-/* ===== TINY HEARTS ===== */
-.tiny-heart {
-  position: fixed;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* QUESTION */
+.questionBox {
+  background: rgba(255,255,255,0.35);
+  padding: 25px;
+  border-radius: 22px;
+  max-width: 90%;
+}
+
+.buttons {
+  margin-top: 20px;
+}
+
+#yes {
+  background: #fff;
+  color: #ff4f8b;
+  margin-right: 15px;
+}
+
+#no {
+  background: #000;
+  color: #fff;
+  position: relative;
+}
+
+/* FINAL SCREEN */
+#final {
+  max-width: 90%;
+}
+
+#final h1 {
+  font-size: 32px;
+  margin-bottom: 15px;
+}
+
+#typing {
   font-size: 16px;
-  animation: floatUp 1.2s ease forwards;
-  pointer-events: none;
-  z-index: 9999;
+  line-height: 1.6;
+  white-space: pre-line;
+  margin-bottom: 20px;
+}
+
+/* DATE CARD */
+.dateCard {
+  background: rgba(255,255,255,0.35);
+  padding: 22px;
+  border-radius: 22px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* HEART EFFECTS */
+.tinyHeart,
+.rainHeart {
+  position: fixed;
+  font-size: 18px;
+  animation: floatUp 1.5s linear;
+}
+
+.tinyHeart::after,
+.rainHeart::after {
+  content: "❤️";
 }
 
 @keyframes floatUp {
-  from {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(-40px) scale(1.4);
-  }
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-120px); opacity: 0; }
 }
